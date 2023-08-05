@@ -8,9 +8,9 @@ void initializeStateFunctions(enum state (*StateFunctions[3])(int c, int numTabl
 
 void handleChar(int c, int numTable[255][3]);
 
-enum state fun1(int c, int numTable[255][3], int first_of_dif8ogos);
-enum state fun2(int c, int numTable[255][3], int first_of_dif8ogos);
-enum state fun3(int c, int numTable[255][3], int first_of_dif8ogos);
+enum state state1(int c, int numTable[255][3], int first_of_dif8ogos);
+enum state state2(int c, int numTable[255][3], int first_of_dif8ogos);
+enum state state3(int c, int numTable[255][3], int first_of_dif8ogos);
 
 
 int main(void){
@@ -181,9 +181,9 @@ void initializeNumTable(int numTable[255][3]){
 
 
 void initializeStateFunctions(enum state (*StateFunctions[3])(int c, int numTable[255][3], int first_of_dif8ogos)){
-    StateFunctions[S1] = fun1;
-    StateFunctions[S2] = fun2;
-    StateFunctions[S3] = fun3;
+    StateFunctions[S1] = state1;
+    StateFunctions[S2] = state2;
+    StateFunctions[S3] = state3;
 }
 
 
@@ -198,7 +198,7 @@ void handleChar(int c, int numTable[255][3]){
 }
 
 
-enum state fun1(int c, int numTable[255][3], int first_of_dif8ogos){
+enum state state1(int c, int numTable[255][3], int first_of_dif8ogos){
 
     /*if it can't be the begining of mp or nt print it normally and stay(return) the same state(S1)*/
     if(c != 204 && c != 236 && c != 205 && c != 237){
@@ -210,7 +210,7 @@ enum state fun1(int c, int numTable[255][3], int first_of_dif8ogos){
     }
 }
 
-enum state fun2(int c, int numTable[255][3], int first_of_dif8ogos){
+enum state state2(int c, int numTable[255][3], int first_of_dif8ogos){
     int toPrint;
 
 	/*if we are in state 2 we have the first of a possible mp or nt
@@ -246,7 +246,7 @@ enum state fun2(int c, int numTable[255][3], int first_of_dif8ogos){
     return 0;
 }
 
-enum state fun3(int c, int numTable[255][3], int first_of_dif8ogos){
+enum state state3(int c, int numTable[255][3], int first_of_dif8ogos){
 	/*if we are in S3 we just print a b or d so if we get anothe m or n we go to S2*/
     if( ( (first_of_dif8ogos == 204 || first_of_dif8ogos == 236) && (c == 204 || c == 236) ) ||
         ( (first_of_dif8ogos == 205 || first_of_dif8ogos == 237) && (c == 205 || c == 237) )
